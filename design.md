@@ -25,7 +25,7 @@ line endings. There is no Org-to-Markdown-to-Org or HTML-to-Org conversion.
 | `src/style.css` | Serif prose, restrained system-font controls, dense numeric tables, responsive split panes, dark theme, reduced motion, and print. |
 | `server/index.ts` | Stdio MCP server. Registers the `.org` entrypoint and bundled app resource; app-only tools support bounded image reads and relative-link resolution. No server write tool. |
 | `server/files.ts` | `scopedPath` resolves real paths and rejects directory escapes, including symlinks. `readImage` accepts bounded raster formats only. |
-| `scripts/` | Build a self-contained server/UI; collect dependency notices; package an explicit runtime allowlist. |
+| `scripts/` | Build a self-contained server/UI; collect dependency notices; package an explicit runtime, examples, and documentation allowlist. Source lives in the matching public Git tag. |
 
 ## Trust Boundaries
 

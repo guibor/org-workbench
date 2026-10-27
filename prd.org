@@ -16,7 +16,7 @@ with a portable browser edition and a public community repository.
 - [X] Responsive light/dark reading typography inspired by MDF Reading.
 - [X] Portable plugin manifest, Codex compatibility manifest, reproducible build.
 - [ ] Confirm a full open/edit/save round-trip in the real Codex desktop host.
-- [ ] Publish the public GitHub repository.
+- [X] Publish the public GitHub repository: https://github.com/guibor/org-workbench
 
 * Immediate Next Steps
 - [ ] Reload the installed plugin in a fresh host session; verify original-file save.
