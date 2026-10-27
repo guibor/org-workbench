@@ -1,0 +1,10 @@
+{
+  "name": "org-workbench-community",
+  "interface": { "displayName": "Org Workbench" },
+  "plugins": [{
+    "name": "org-workbench",
+    "source": { "source": "local", "path": "./" },
+    "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+    "category": "Productivity"
+  }]
+}

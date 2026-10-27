@@ -1,0 +1,63 @@
+{
+  "name": "org-workbench",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "A source-preserving Org editor and MCP file-viewer plugin",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build && node scripts/build-server.mjs && node scripts/licenses.mjs",
+    "package": "npm run build && node scripts/package.mjs",
+    "install:codex": "npm run package && codex plugin marketplace add ./release && codex plugin add org-workbench@org-workbench-community",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "check": "npm run build && npm test && npm run test:e2e",
+    "start": "node dist/server.mjs"
+  },
+  "dependencies": {
+    "@codemirror/commands": "^6.11.1",
+    "@codemirror/language": "^6.13.1",
+    "@codemirror/state": "^6.7.6",
+    "@codemirror/view": "^6.43.15",
+    "@modelcontextprotocol/ext-apps": "^1.7.5",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@openai/mcp-extensions": "^0.2.1",
+    "codemirror": "^6.0.2",
+    "hast-util-to-jsx-runtime": "^2.3.6",
+    "katex": "^0.19.1",
+    "lucide-react": "^1.62.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "rehype-highlight": "^7.0.2",
+    "rehype-katex": "^7.0.1",
+    "rehype-sanitize": "^6.0.0",
+    "unified": "^11.0.5",
+    "uniorg-parse": "^3.2.2",
+    "uniorg-rehype": "^2.2.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-singlefile": "^2.3.4",
+    "vitest": "^5.0.5"
+  },
+  "overrides": {
+    "@openai/mcp-extensions": {
+      "zod": "^4.6.6"
+    },
+    "rehype-katex": {
+      "katex": "^0.18.2"
+    }
+  }
+}

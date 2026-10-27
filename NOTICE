@@ -1,0 +1,9 @@
+Org Workbench
+Copyright (C) 2026 Org Workbench contributors
+Licensed under GNU GPL version 3 or, at your option, any later version.
+
+Uniorg (rasendubi/uniorg) provides Org parsing and conversion and is licensed
+GPL-3.0-or-later. Org Workbench does not bundle or require GNU Emacs.
+The FileText-derived icon is based on Lucide (ISC).
+Other dependencies retain their respective licenses. Generated runtime packages
+include their license texts in dist/THIRD_PARTY_LICENSES.txt.

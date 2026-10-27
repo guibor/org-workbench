@@ -1,0 +1,21 @@
+<!doctype html><html><head><title>MCP test host</title><style>body{margin:0}iframe{width:100%;height:100vh;border:0}</style></head><body><iframe title="Org file editor" src="/"></iframe><script type="module">
+const frame = document.querySelector('iframe');
+if (new URLSearchParams(location.search).has('production')) frame.src = '/dist/ui/index.html';
+window.disk = {text: '#+title: Host document\n* TODO First task\n- [ ] A checkbox\n', etag: 'v1'};
+function send(message) { frame.contentWindow.postMessage({jsonrpc:'2.0', ...message}, location.origin); }
+window.externalChange = () => { window.disk = {text: '#+title: Host document\n* External content\n', etag:'external'}; send({method:'notifications/resources/updated',params:{uri:'host-resource://fixture'}}); };
+window.addEventListener('message', event => {
+  if (event.source !== frame.contentWindow || event.origin !== location.origin) return;
+  const m = event.data;
+  if (m.method === 'ui/initialize') send({id:m.id,result:{protocolVersion:'2026-01-26',hostInfo:{name:'test-host',version:'26.1027.1'},hostCapabilities:{experimental:{'openai/resource':{}}},hostContext:{theme:'light',displayMode:'fullscreen'}}});
+  else if (m.method === 'ui/notifications/initialized') send({method:'ui/notifications/tool-input',params:{arguments:{file:{name:'fixture.org',resourceUri:'host-resource://fixture'}}}});
+  else if (m.method === 'resources/read') send({id:m.id,result:{contents:[{uri:'host-resource://fixture',text:disk.text,_meta:{'openai/resource':{writable:true,etag:disk.etag}}}]}});
+  else if (m.method === 'resources/subscribe' || m.method === 'resources/unsubscribe') send({id:m.id,result:{}});
+  else if (m.method === 'ui/download-file') { window.exported = m.params.contents[0].resource.text; send({id:m.id,result:{}}); }
+  else if (m.method === 'openai/resources/write') {
+    window.lastMatch = m.params.ifMatch;
+    if (m.params.ifMatch !== disk.etag) send({id:m.id,result:{outcome:'conflict',etag:disk.etag}});
+    else { disk = {text:m.params.text,etag:'v2'}; send({id:m.id,result:{outcome:'saved',etag:disk.etag}}); }
+  }
+});
+</script></body></html>

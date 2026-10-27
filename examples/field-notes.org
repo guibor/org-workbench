@@ -1,0 +1,57 @@
+#+TITLE: A quieter place to think
+#+SUBTITLE: Field notes on tools, attention, and the work that matters.
+#+AUTHOR: Org Workbench community
+#+TODO: TODO NEXT WAITING | DONE
+#+STARTUP: overview
+
+* The working notebook :notes:
+:PROPERTIES:
+:CUSTOM_ID: notebook
+:END:
+Good notes leave room for an idea to grow. They hold a question, a few useful facts, and a next step without demanding a system of their own.
+
+Org is a particularly good home for this: /plain text underneath/, structure when you need it. A document can be a reading list in the morning and a small project by the afternoon.[fn:1]
+
+#+begin_quote
+Above all else show the data.
+— Edward Tufte, /The Visual Display of Quantitative Information/
+#+end_quote
+
+* NEXT Make space for focused work :work:attention:
+SCHEDULED: <2026-10-28 Wed 09:00>
+- [X] Gather the material in one place
+- [ ] Choose the question worth answering
+- [ ] Leave a useful note for tomorrow
+  - [ ] Record the decision and its context
+
+** A small experiment
+Try three ways of approaching the same problem. Keep the comparison concrete, and write down what actually happened.
+
+| Approach            | Focus (min) | Interruptions | What changed                       |
+|---------------------+-------------+---------------+------------------------------------|
+| Notifications on    |          18 |             7 | Several starts, no clear finish    |
+| One window          |          42 |             2 | Enough time to follow the argument |
+| Notebook first      |          55 |             0 | A sharper question before research |
+
+These are illustrative observations, not a research result. The table is part of the notebook, not a separate spreadsheet.
+
+* TODO Read, connect, return :reading:
+DEADLINE: <2026-11-02 Mon>
+1. [[https://orgmode.org/manual/][The Org manual]]: a reference to come back to.
+2. [[#notebook][The working notebook]]: connect the idea to its context.
+3. Revisit the question after a night away.
+
+The useful part of a model is often its assumptions. For a simple average, $\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i$.
+
+#+begin_src python
+def next_step(notes):
+    return next(note for note in notes if note.is_actionable)
+#+end_src
+
+* DONE Keep the original :principles:
+Text is the durable part. The view should make it easier to read and work with, without becoming the only place the document can live.
+
+** Notes in more than one language
+שלום. מסמך אחד יכול להכיל עברית ואנגלית, תאריכים, רעיונות והערות.
+
+[fn:1] Org documents can outlive the application used to view them.

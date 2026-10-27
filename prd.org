@@ -1,0 +1,40 @@
+#+TITLE: Org Workbench Requirements
+
+* Purpose
+Make original Org files first-class reading and editing documents in Codex,
+with a portable browser edition and a public community repository.
+
+* Requirements
+- [X] Preserve original .org source; no Markdown round-trip.
+- [X] Render headings, prose, lists, checkboxes, tables, links, code, and math.
+- [X] Read, Split, and Source modes with a searchable outline.
+- [X] Interactive TODO, checkbox, and table-cell editing.
+- [X] Shared undo/redo and keyboard-accessible controls.
+- [X] Conditional host saves, clean refresh, and dirty conflict protection.
+- [X] Keep HTML, Babel, includes, and file-local configuration inert.
+- [X] Local-first; no telemetry or remote image tracking.
+- [X] Responsive light/dark reading typography inspired by MDF Reading.
+- [X] Portable plugin manifest, Codex compatibility manifest, reproducible build.
+- [ ] Confirm a full open/edit/save round-trip in the real Codex desktop host.
+- [ ] Publish the public GitHub repository.
+
+* Immediate Next Steps
+- [ ] Reload the installed plugin in a fresh host session; verify original-file save.
+- [ ] Add representative community fixtures before expanding the Org dialect.
+- [ ] Consider recoverable drafts with explicit storage/privacy controls.
+- [ ] Per-sequence TODO workflows, statistics-cookie updates, and table alignment hints.
+- [ ] Optional cross-file ID/Denote resolver with an explicit workspace grant.
+- [ ] Large-document worker parsing and measured latency benchmarks.
+
+* Non-goals for 0.1
+Org agenda, capture, formula execution, Babel execution, automatic inclusion,
+lossy WYSIWYG serialization, and full parity with Emacs Org export.
+
+* Changed Requirements
+** Editable, not read-only
+The previous feasibility proposal was a read-only viewer. The current request
+explicitly replaces that with rendered interactions and source editing. The
+original Org text remains canonical in both designs.
+** Public community project
+The user explicitly chose public GitHub visibility rather than an initial
+private repository. Private notes and machine configuration must not be included.
