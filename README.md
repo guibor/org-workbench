@@ -24,8 +24,10 @@ key is needed. Your original Org file remains the source of truth.
   collapsible properties, links, footnotes, code, and KaTeX math.
 - **Light and dark.** Responsive layouts, keyboard navigation, reduced-motion
   support, and a print stylesheet.
+- **Reading profiles.** MDF Reading, Nano-inspired, and Plain, with adjustable
+  text size, line height, page width, and table density.
 
-This is an early **0.1 community release**, not a replacement for Org's agenda,
+This is an early **0.2 community preview**, not a replacement for Org's agenda,
 capture, Babel, or Emacs. See [compatibility](docs/compatibility.org) for exact
 limits and [design.md](design.md) for the architecture.
 
@@ -33,8 +35,21 @@ limits and [design.md](design.md) for the architecture.
 
 ## Install in Codex Desktop
 
-Requirements: Node.js 22+, npm, Git, and a current Codex CLI/Desktop with local
-plugins and MCP file-extension handlers. File handlers are a **desktop** feature.
+Requirements: **Node.js 22+** and a current **Codex CLI/Desktop** with local
+plugins and MCP file-extension handlers. On macOS/Linux, with `curl`, `unzip`,
+and `shasum` or `sha256sum` available:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/guibor/org-workbench/v0.2.0/install.sh | sh
+```
+
+This installs a **prebuilt, checksum-verified release** under your user account.
+No Git, npm, source build, or sudo is needed. Older versions are preserved.
+It executes code downloaded from this repository; review the script first if
+preferred. See [installation instructions](docs/install.org) for that alternative,
+custom paths, updating, and troubleshooting. File handlers are a **desktop** feature.
+
+Alternatively, build from source (requires Git and npm):
 
 ```sh
 git clone https://github.com/guibor/org-workbench.git
@@ -43,7 +58,7 @@ npm ci
 npm run install:codex
 ```
 
-The installer builds a small, self-contained package in `release/`, registers
+The source installer builds a small, self-contained package in `release/`, registers
 its marketplace, and installs `org-workbench@org-workbench-community`. Keep the
 checkout if you want to rebuild and update it. It does not change your Emacs
 configuration or register global filesystem access.
@@ -72,6 +87,7 @@ npm; the prebuilt plugin has its dependencies bundled and only needs Node.
 | Action | Control |
 | --- | --- |
 | Switch between rendered document and source | Read / Split / Source |
+| Change reading profile and typography | Palette button in the toolbar |
 | Edit a task or checkbox | Click it in Read or Split |
 | Edit a table cell | Click, or focus it and press Enter |
 | Edit arbitrary Org text | Source, or double-click a paragraph |
@@ -89,6 +105,14 @@ in-memory editing and export, but never pretend to save the original file.
 Changes to TODO states and checkboxes do not run Org hooks, update statistics
 cookies, log timestamps, or change dependent tasks.
 
+The palette button changes only the rendered document. Pick a profile, then
+adjust text size, line height, page width, and table density. **Reset profile**
+restores its defaults. Preferences persist when browser storage is available;
+no document text is cached. These are reading profiles, not importers for
+Emacs theme files or arbitrary CSS.
+
+![Nano-inspired profile with customized typography](docs/nano.png)
+
 ## Browser Edition
 
 ```sh
@@ -98,7 +122,8 @@ npm run dev
 Open the localhost URL. Use the folder button to import any `.org` file.
 The browser edition edits in memory and exports a downloaded `.org` copy;
 it **does not overwrite** the imported file. Files are not uploaded or persisted
-in browser storage. Relative images/file links require the desktop file handler.
+in browser storage. Only appearance preferences are stored locally, when the
+host allows storage. Relative images/file links require the desktop file handler.
 
 `npm run build` also produces a self-contained `dist/ui/index.html`.
 
@@ -137,6 +162,12 @@ Built on [Uniorg](https://github.com/rasendubi/uniorg),
 [OpenAI MCP Extensions](https://github.com/openai/mcp-extensions) SDKs.
 GitHub and GitLab's rendered/source document views inspired the interaction;
 this project is not affiliated with those services or OpenAI.
+
+The optional Nano-inspired profile is original CSS informed by Nicolas P.
+Rougier's [NANO theme](https://github.com/rougier/nano-theme) and
+[NANO Emacs](https://github.com/rougier/nano-emacs): restrained hierarchy,
+monospaced reading, and emphasis through weight. It is not an official port,
+does not bundle their code or fonts, and implies no endorsement.
 
 GPL-3.0-or-later, consistent with Uniorg's license. See [LICENSE](LICENSE) and
 [NOTICE](NOTICE). Bundled dependency notices ship in

@@ -1,6 +1,55 @@
 import { expect, test } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 
+test('appearance profiles persist without dirtying the source', async ({ page }, testInfo) => {
+  await page.goto('/');
+  const palette = page.getByRole('button', { name: 'Reading appearance', exact: true });
+  await palette.click();
+  await page.getByLabel('Profile', { exact: true }).selectOption('nano');
+  await page.getByLabel('Text size').press('Home');
+  for (let i = 0; i < 5; i++) await page.getByLabel('Text size').press('ArrowRight');
+  await page.getByLabel('Line height').press('Home');
+  for (let i = 0; i < 9; i++) await page.getByLabel('Line height').press('ArrowRight');
+  await page.getByLabel('Table density').selectOption('comfortable');
+  await page.getByRole('button', { name: 'Done', exact: true }).click();
+  await expect(page.locator('.workbench')).toHaveAttribute('data-profile', 'nano');
+  await expect(page.locator('.document')).toHaveCSS('font-size', '19px');
+  await expect(page.locator('.dirty-status')).toHaveCount(0);
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download copy' }).click();
+  expect(await readFile((await (await download).path())!, 'utf8')).toBe(await readFile('examples/field-notes.org', 'utf8'));
+  await page.reload();
+  await expect(page.locator('.document')).toHaveCSS('font-size', '19px');
+  await page.screenshot({ path: testInfo.outputPath('nano.png') });
+  await page.getByRole('button', { name: 'Dark theme' }).click();
+  await page.getByRole('button', { name: 'Split', exact: true }).click();
+  await page.screenshot({ path: testInfo.outputPath('nano-dark.png') });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await palette.click();
+  await page.getByRole('button', { name: 'Reset profile' }).click();
+  await expect(page.getByLabel('Text size')).toHaveValue('16');
+  await page.getByLabel('Profile', { exact: true }).selectOption('plain');
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(palette).toBeFocused();
+  const stored = await page.evaluate(() => localStorage.getItem('org-workbench:appearance:v1'));
+  expect(JSON.parse(stored!)).toEqual({ profile: 'plain', fontSize: 17, lineHeight: 1.6, width: 920, tableDensity: 'comfortable' });
+});
+
+test('appearance remains usable when local storage is blocked', async ({ page }) => {
+  await page.addInitScript(() => {
+    Storage.prototype.getItem = () => { throw new DOMException('Blocked', 'SecurityError'); };
+    Storage.prototype.setItem = () => { throw new DOMException('Blocked', 'SecurityError'); };
+  });
+  await page.goto('/');
+  await expect(page.locator('.workbench')).toHaveAttribute('data-profile', 'reading');
+  await page.getByRole('button', { name: 'Reading appearance', exact: true }).click();
+  await page.getByLabel('Profile', { exact: true }).selectOption('nano');
+  await page.getByRole('button', { name: 'Done', exact: true }).click();
+  await expect(page.locator('.workbench')).toHaveAttribute('data-profile', 'nano');
+  await expect(page.locator('.dirty-status')).toHaveCount(0);
+});
+
 test('rendered edits, source, undo, table editing, and download preserve Org', async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', e => errors.push(e.message));

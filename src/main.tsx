@@ -3,5 +3,6 @@ import { Workbench } from './Workbench';
 import '@openai/mcp-extensions/app/styles.css';
 import 'katex/dist/katex.min.css';
 import './style.css';
+import './appearance.css';
 
 createRoot(document.getElementById('root')!).render(<Workbench />);

@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
-import { BookOpen, Code2, Columns2, Download, FolderOpen, Save, Undo2, Redo2, PanelLeft, Search, Sun, Moon, RefreshCw, Link2, X, FileText, Check, AlertCircle } from 'lucide-react';
+import { BookOpen, Code2, Columns2, Download, FolderOpen, Save, Undo2, Redo2, PanelLeft, Search, Sun, Moon, RefreshCw, Link2, X, FileText, Check, AlertCircle, Palette } from 'lucide-react';
 import { parseOrg, applyPatch, toggleTask, toggleCheckbox, editCell, type Patch } from './org';
 import type { TableCell } from 'uniorg';
 import { DocumentSession, type FileAdapter } from './document';
 import { connectHost, browserFile, download } from './host';
 import { Editor } from './Editor';
 import { Reading } from './Reading';
+import { AppearancePanel } from './AppearancePanel';
+import { loadAppearance, saveAppearance } from './appearance';
 import sample from '../examples/field-notes.org?raw';
 
 const demoAdapter: FileAdapter = { name: 'field-notes.org', read: async () => ({ text: sample, writable: false }) };
@@ -48,6 +50,9 @@ function Workspace({ session, replace, fatal }: { session: DocumentSession; repl
   const [outline, setOutline] = useState(window.innerWidth > 800);
   const [query, setQuery] = useState('');
   const [dark, setDark] = useState(document.documentElement.dataset.theme === 'dark');
+  const [appearance, setAppearance] = useState(loadAppearance);
+  const [showAppearance, setShowAppearance] = useState(false);
+  useEffect(() => { saveAppearance(appearance); }, [appearance]);
   const [sync, setSync] = useState(true);
   const [jump, setJump] = useState<{ offset: number; serial: number } | null>(null);
   const [notice, setNotice] = useState('');
@@ -75,7 +80,7 @@ function Workspace({ session, replace, fatal }: { session: DocumentSession; repl
   const save = () => { if (state.writable) void session.save(); else exportCopy(); };
   useEffect(() => {
     const keys = (e: KeyboardEvent) => {
-      if (!(e.metaKey || e.ctrlKey) || (e.target as HTMLElement).closest('.cm-editor')) return;
+      if (!(e.metaKey || e.ctrlKey) || (e.target as HTMLElement).closest('.cm-editor,dialog,input,textarea,select')) return;
       if (e.key === 's') { e.preventDefault(); save(); }
       if (e.key === 'z') { e.preventDefault(); e.shiftKey ? session.redo() : session.undo(); }
     };
@@ -120,7 +125,7 @@ function Workspace({ session, replace, fatal }: { session: DocumentSession; repl
       else setNotice('Local file links require the desktop file handler.');
     } catch (e) { setNotice(String(e)); }
   }
-  return <main className="workbench">
+  return <main className="workbench" data-profile={appearance.profile} data-table-density={appearance.tableDensity} style={{ '--reading-size': `${appearance.fontSize}px`, '--reading-leading': appearance.lineHeight, '--reading-width': `${appearance.width}px` } as React.CSSProperties}>
     <header className="toolbar">
       <div className="identity"><Tool label="Toggle outline" active={outline} onClick={() => setOutline(!outline)}><PanelLeft size={18} /></Tool><FileText className="brand-icon" size={20} /><div className="file-identity"><strong>Org Workbench</strong><span title={session.adapter.name}>{session.adapter.name}{dirty ? ' •' : ''}</span></div></div>
       <div className="modes" role="group" aria-label="Document view">{([['read', BookOpen, 'Read'], ['split', Columns2, 'Split'], ['source', Code2, 'Source']] as const).map(([value, Icon, label]) => <button key={value} aria-pressed={mode === value} onClick={() => setMode(value)}><Icon size={15} /><span>{label}</span></button>)}</div>
@@ -128,6 +133,7 @@ function Workspace({ session, replace, fatal }: { session: DocumentSession; repl
         {mode === 'split' && <Tool label="Follow source cursor" active={sync} onClick={() => setSync(!sync)}><Link2 size={17} /></Tool>}
         {!embedded && <Tool label="Open Org file" onClick={() => input.current?.click()}><FolderOpen size={17} /></Tool>}
         <Tool label="Reload from disk" onClick={() => { if (!dirty || confirm('Discard your unsaved edits and reload?')) void session.refresh(true); }}><RefreshCw size={16} /></Tool>
+        <Tool label="Reading appearance" active={showAppearance} onClick={() => setShowAppearance(true)}><Palette size={17} /></Tool>
         <Tool label={dark ? 'Light theme' : 'Dark theme'} onClick={() => { setDark(!dark); document.documentElement.dataset.theme = !dark ? 'dark' : 'light'; }}><Sun size={17} className={dark ? '' : 'hidden'} /><Moon size={17} className={dark ? 'hidden' : ''} /></Tool>
         <Tool label="Download copy" onClick={exportCopy}><Download size={17} /></Tool>
         {state.writable && <button className="save-button" disabled={!dirty || state.saving || state.conflict} onClick={save}><Save size={15} /><span>{state.saving ? 'Saving…' : 'Save'}</span></button>}
@@ -151,6 +157,7 @@ function Workspace({ session, replace, fatal }: { session: DocumentSession; repl
       </div>
     </div>
     <footer className="statusbar"><span className={dirty ? 'dirty-status' : ''}>{dirty ? 'Unsaved changes' : <><Check size={12} />{state.writable ? 'Saved' : 'Local document'}</>}</span><span>{state.writable ? 'Original .org file' : embedded ? 'Host is read-only · Export available' : 'Browser edition · Export to save'}<span className="status-separator">·</span>{new TextEncoder().encode(state.source).length.toLocaleString()} bytes</span></footer>
+    {showAppearance && <AppearancePanel value={appearance} change={setAppearance} close={() => setShowAppearance(false)} />}
     {cell && <div className="modal-backdrop" onClick={e => { if (e.target === e.currentTarget) setCell(null); }}><form className="cell-dialog" role="dialog" aria-modal="true" aria-label="Edit table cell" onSubmit={e => {
       e.preventDefault();
       try { if (sourceRef.current !== cell.source) throw new Error('The document changed while this cell was open. Reopen the cell to edit it.'); session.edit(applyPatch(state.source, editCell(state.source, cell.node, cell.value))); setCell(null); setNotice(''); }

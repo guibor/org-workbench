@@ -1,6 +1,6 @@
 {
   "name": "org-workbench",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "A source-preserving Org editor and MCP file-viewer plugin",
@@ -12,6 +12,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build && node scripts/build-server.mjs && node scripts/licenses.mjs",
     "package": "npm run build && node scripts/package.mjs",
+    "package:archive": "npm run package && node scripts/archive.mjs",
     "install:codex": "npm run package && codex plugin marketplace add ./release && codex plugin add org-workbench@org-workbench-community",
     "test": "vitest run",
     "test:e2e": "playwright test",

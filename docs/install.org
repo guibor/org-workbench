@@ -1,0 +1,81 @@
+#+TITLE: Installing Org Workbench
+
+* One command
+Requires macOS/Linux, Node.js 22+, a current Codex CLI and Codex Desktop with
+local plugin/file-handler support, curl, unzip, and shasum or sha256sum.
+Node must also be on the PATH seen by Codex Desktop. The installer reports
+missing prerequisites; it does not install or change your language runtimes.
+
+#+begin_src sh
+curl -fsSL https://raw.githubusercontent.com/guibor/org-workbench/v0.2.0/install.sh | sh
+#+end_src
+
+Restart Codex or start a fresh chat with Org Workbench selected through =@=.
+Open a =.org= file in the file panel. Start with a non-private test file and
+verify saving before relying on in-place edits. The browser edition downloads
+a copy; it does not overwrite imported files.
+
+* What it does
+- Downloads the pinned v0.2.0 prebuilt archive and SHA256SUMS from GitHub Releases.
+- Verifies SHA-256 and rejects unexpected archive paths and symlinks.
+- Installs under =~/.local/share/org-workbench/releases/v0.2.0= by default.
+- Respects =XDG_DATA_HOME= or an absolute =ORG_WORKBENCH_HOME= override.
+- Registers the local marketplace and installs =org-workbench@org-workbench-community=.
+- Re-registers an existing local Org Workbench marketplace when upgrading;
+  attempts to restore the previous registration if installing the new release fails.
+- Preserves previous version directories. No sudo, Git, npm, or source build.
+
+The checksum detects damaged downloads. It is served by the same publisher as
+the archive and is not an independent signature or a substitute for trusting
+the source. The command executes downloaded shell code. To inspect it first:
+
+#+begin_src sh
+curl -fL https://raw.githubusercontent.com/guibor/org-workbench/v0.2.0/install.sh -o org-workbench-install.sh
+less org-workbench-install.sh
+sh org-workbench-install.sh
+#+end_src
+
+To choose a location, use =ORG_WORKBENCH_HOME=/absolute/path sh org-workbench-install.sh=.
+Do not delete the registered marketplace directory while using the plugin.
+
+* Build from source
+#+begin_src sh
+git clone https://github.com/guibor/org-workbench.git
+cd org-workbench
+npm ci
+npm run install:codex
+#+end_src
+
+Developers can use =npm run dev= for the standalone browser editor, or
+=npm run package:archive= to build the release ZIP and checksums in =artifacts/=.
+Source builds require Node.js 22+, npm, and Git. Archive creation also uses zip.
+
+* Update or remove
+Run the pinned installation command from the newer release's README. The
+installer registers that release, leaving older files alone. Restart Codex or
+open a fresh chat after an update. Running the same version again is supported.
+An existing Git-based marketplace with the same name must be removed explicitly;
+the installer migrates local registrations only.
+
+To unregister the plugin and its marketplace:
+
+#+begin_src sh
+codex plugin remove org-workbench@org-workbench-community
+codex plugin marketplace remove org-workbench-community
+#+end_src
+
+Downloaded release files remain under your chosen installation root. Remove
+them manually when no longer needed; the installer never deletes old releases.
+
+* Troubleshooting
+- =Couldn't display Org Workbench= / =unknown MCP server=: restart Codex or open
+  a fresh chat with the plugin selected. An old chat may find the handler before
+  it loads the newly installed MCP backend.
+- =node= not found: make Node.js 22+ available to Codex Desktop's environment.
+- No Save button: the host did not provide writable metadata or an ETag. Export
+  a copy; the plugin does not bypass the host's write permissions.
+- Checksum failure: stop and retry the official release later. Do not bypass it.
+- An existing installation directory is unrecognized: choose another installation
+  root or inspect the existing directory. It is not overwritten automatically.
+- Preferences reset in a sandboxed host: that host may block browser storage.
+  The controls still work for the current view; document content is never stored.

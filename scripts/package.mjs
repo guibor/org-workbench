@@ -4,7 +4,7 @@ const root = resolve('release');
 const dest = resolve(root, 'org-workbench');
 await mkdir(dest, { recursive: true });
 // Explicit allowlist: no notes, credentials, node_modules, or developer state.
-for (const path of ['plugin.json', 'mcp.json', '.mcp.json', '.codex-plugin', 'assets/icon.svg', 'skills', 'dist', 'LICENSE', 'NOTICE', 'README.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', 'design.md', 'prd.org', 'docs', 'examples']) {
+for (const path of ['plugin.json', 'mcp.json', '.mcp.json', '.codex-plugin', 'assets/icon.svg', 'skills', 'dist', 'LICENSE', 'NOTICE', 'README.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', 'design.md', 'prd.org', 'docs', 'examples', 'install.sh']) {
   await mkdir(resolve(dest, path, '..'), { recursive: true });
   await cp(path, resolve(dest, path), { recursive: true });
 }

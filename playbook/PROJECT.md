@@ -16,7 +16,8 @@
 
 ## Milestones
 
-- Near term: release 0.1 and qualify desktop integration separately from mocked tests.
+- Near term: release 0.2 with configurable reading profiles and prebuilt installation;
+  qualify native desktop saving separately from user-confirmed opening and mocked tests.
 - Next: collect real community fixtures and close compatibility gaps.
 - Later: optional indexed links and measured large-file performance improvements.
 

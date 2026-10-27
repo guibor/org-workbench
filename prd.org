@@ -14,19 +14,24 @@ with a portable browser edition and a public community repository.
 - [X] Keep HTML, Babel, includes, and file-local configuration inert.
 - [X] Local-first; no telemetry or remote image tracking.
 - [X] Responsive light/dark reading typography inspired by MDF Reading.
+- [X] Selectable MDF Reading, Nano-inspired, and Plain rendering profiles.
+- [X] Adjustable typography, page width, and table density without source edits.
+- [X] One-command, checksum-verified prebuilt installation with no sudo.
+- [X] Prepare Reddit and announcement drafts; do not post them automatically.
 - [X] Portable plugin manifest, Codex compatibility manifest, reproducible build.
 - [ ] Confirm a full open/edit/save round-trip in the real Codex desktop host.
 - [X] Publish the public GitHub repository: https://github.com/guibor/org-workbench
 
 * Immediate Next Steps
-- [ ] Reload the installed plugin in a fresh host session; verify original-file save.
+- [X] Confirm installed plugin opening: user reports the view now works.
+- [ ] Verify original-file save in the real desktop host separately from opening.
 - [ ] Add representative community fixtures before expanding the Org dialect.
 - [ ] Consider recoverable drafts with explicit storage/privacy controls.
 - [ ] Per-sequence TODO workflows, statistics-cookie updates, and table alignment hints.
 - [ ] Optional cross-file ID/Denote resolver with an explicit workspace grant.
 - [ ] Large-document worker parsing and measured latency benchmarks.
 
-* Non-goals for 0.1
+* Non-goals for 0.2
 Org agenda, capture, formula execution, Babel execution, automatic inclusion,
 lossy WYSIWYG serialization, and full parity with Emacs Org export.
 
@@ -38,3 +43,8 @@ original Org text remains canonical in both designs.
 ** Public community project
 The user explicitly chose public GitHub visibility rather than an initial
 private repository. Private notes and machine configuration must not be included.
+** Configurable presentation and prebuilt installation
+The original single reading profile is now the default among three profiles.
+Appearance preferences may persist locally, but never document contents or paths.
+The primary installation instructions now use a pinned prebuilt release rather
+than requiring every reader to clone and compile. Source installation remains supported.

@@ -7,3 +7,10 @@ GPL-3.0-or-later. Org Workbench does not bundle or require GNU Emacs.
 The FileText-derived icon is based on Lucide (ISC).
 Other dependencies retain their respective licenses. Generated runtime packages
 include their license texts in dist/THIRD_PARTY_LICENSES.txt.
+
+The optional Nano-inspired reading profile uses original CSS informed by
+Nicolas P. Rougier's NANO theme and NANO Emacs design principles:
+https://github.com/rougier/nano-theme
+https://github.com/rougier/nano-emacs
+No NANO source code or font files are bundled. This is not an official port
+and implies no affiliation or endorsement.

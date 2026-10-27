@@ -17,4 +17,4 @@ Please report vulnerabilities using GitHub's private vulnerability reporting
 when enabled, or contact the repository owner privately. Do not post sensitive
 documents, tokens, or exploit data from someone else's machine in public issues.
 
-Only the latest 0.1.x release is supported. Rebuild/update dependencies regularly.
+Only the latest preview release is supported. Rebuild/update dependencies regularly.

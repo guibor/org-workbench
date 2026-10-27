@@ -1,0 +1,37 @@
+/* Original styles inspired by Nano's restrained hierarchy, not an Emacs theme port. */
+.workbench { --reading-font: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; }
+.workbench[data-profile=nano] { --reading-font: "Roboto Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; }
+.workbench[data-profile=plain] { --reading-font: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.workbench .document { font-family:var(--reading-font); font-size:var(--reading-size); line-height:var(--reading-leading); max-width:var(--reading-width); }
+.workbench .document blockquote { font-size:inherit; }
+.workbench[data-profile=nano] .document h1,
+.workbench[data-profile=nano] .document h2,
+.workbench[data-profile=nano] .document h3,
+.workbench[data-profile=nano] .document h4,
+.workbench[data-profile=nano] .document h5,
+.workbench[data-profile=nano] .document h6 { font-family:var(--reading-font); font-weight:600; }
+.workbench[data-profile=nano] .document h1 { font-size:26px; }
+.workbench[data-profile=nano] .document h2 { font-size:1.125em; }
+.workbench[data-profile=nano] .document h3 { font-size:1em; }
+.workbench[data-profile=nano] .document .eyebrow { display:none; }
+.workbench[data-profile=nano] .document .subtitle { font-family:var(--reading-font); font-size:14px; }
+.workbench[data-profile=nano] .task-state { background:transparent; color:var(--ink); padding-left:0; font-weight:700; }
+.workbench[data-profile=nano] .task-state.complete { color:var(--muted); }
+.workbench[data-profile=nano] .document blockquote { border-left-color:var(--line); }
+.workbench[data-profile=nano] .table-scroll { border-top:1px solid var(--line); }
+.workbench[data-profile=nano] .document tbody tr:nth-child(even) { background:transparent; }
+.workbench[data-profile=plain] .document h1 { font-size:30px; font-weight:650; }
+.workbench[data-profile=plain] .document .eyebrow { display:none; }
+.workbench[data-table-density=comfortable] .document th,
+.workbench[data-table-density=comfortable] .document td { padding:16px; font-size:13px; }
+.appearance-panel { width:360px; max-width:calc(100vw - 32px); max-height:calc(100dvh - 48px); overflow:auto; border:1px solid var(--line); border-radius:8px; background:var(--paper); color:var(--ink); padding:20px; box-shadow:0 16px 70px #0003; }
+.appearance-panel::backdrop { background:#0005; }
+.appearance-panel header,.appearance-panel footer { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.appearance-panel h2 { font-size:16px; margin:0; font-weight:600; }
+.appearance-field { display:flex; flex-direction:column; gap:10px; font-size:12px; margin:22px 0; }
+.appearance-field>span { display:flex; justify-content:space-between; }
+.appearance-field output { color:var(--muted); font-variant-numeric:tabular-nums; }
+.appearance-field select { width:100%; border:1px solid var(--line); border-radius:4px; padding:9px; background:var(--canvas); color:var(--ink); font:inherit; }
+.appearance-field input[type=range] { width:100%; accent-color:var(--accent); }
+.appearance-reset { display:flex; align-items:center; gap:7px; border:0; padding:8px; background:transparent; color:var(--muted); font-size:12px; }
+@media(max-width:440px) { .workbench[data-profile=nano] .document h1 { font-size:24px; } .workbench[data-profile=plain] .document h1 { font-size:26px; } }

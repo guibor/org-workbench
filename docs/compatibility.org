@@ -9,12 +9,13 @@
 - Internal heading links and in-file ID/CUSTOM_ID targets.
 - HTTP(S)/mailto links, host-scoped relative file links and explicit raster images.
 - Full source editing, exact rich-edit patches, undo/redo, host version checks.
+- MDF Reading, Nano-inspired, and Plain profiles with adjustable typography.
 
 * Deliberate Limits
 - UTF-8 files up to 1 MiB; no encoding conversion.
 - No Babel, table formula execution, includes, setup-file reads, or local variables.
 - No Emacs TODO hooks, automatic CLOSED dates, dependency updates, or statistics cookies.
-- Multiple TODO sequences are combined into a single cycle in 0.1.
+- Multiple TODO sequences are combined into a single cycle in 0.2.
 - Tables do not evaluate formulas or interpret all alignment/column-group hints.
 - Cross-file id:/denote: links require an external note index; not followed here.
 - Absolute paths, directory escapes, file::search links, SVG and remote images are blocked.
@@ -39,4 +40,5 @@ Save-original control is not offered.
 - [X] Desktop and mobile browser workflows.
 - [X] Mock-host read, conditional write, resource update, and conflict flow.
 - [X] Local Codex plugin installation and .org handler discovery.
-- [ ] Live desktop open/edit/save after loading the newly installed backend.
+- [X] Live desktop opening: user confirmed the installed viewer works.
+- [ ] Live desktop original-file edit/save round-trip, separate from opening.
