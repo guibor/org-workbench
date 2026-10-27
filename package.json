@@ -16,6 +16,8 @@
     "install:codex": "npm run package && codex plugin marketplace add ./release && codex plugin add org-workbench@org-workbench-community",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "screenshots": "node scripts/capture-announcement.mjs",
+    "prepare:reddit": "node scripts/prepare-reddit.mjs",
     "check": "npm run build && npm test && npm run test:e2e",
     "start": "node dist/server.mjs"
   },

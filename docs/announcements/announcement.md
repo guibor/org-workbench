@@ -1,45 +1,37 @@
-# Announcement Draft
+# Org Workbench: An Org File Viewer and Editor Plugin for Codex
 
-Not posted or sent.
+Open your existing `.org` files directly inside Codex, with readable tables,
+a folding outline, interactive tasks, and source editing. Your original Org
+file stays the source of truth. No Markdown conversion or separate editor window.
 
-## Org Workbench: Read and Edit Org Without Converting It
+Org Workbench adds rendered, source, and split views to Codex's file panel.
+TODO states, checkboxes, and table cells are editable, with shared undo and
+version-checked saves when the host supports writes. Reading profiles include
+MDF Reading, Plain, and Nano-inspired, with configurable text size, spacing,
+page width, and table density.
 
-Org Workbench is a local, open-source viewer and editor for `.org` files.
-It opens in Codex's file panel and also runs in a browser. The original Org
-source stays canonical: no Markdown copy, HTML round-trip, or Emacs dependency.
+It builds on Uniorg, CodeMirror, KaTeX, Highlight.js, React, and the official
+MCP SDKs. Org Workbench supplies the file-viewer integration and source-preserving
+interactions; it does not reimplement those parsing and editing frameworks.
 
-The 0.2 preview includes rendered/source/split views, a folding outline,
-interactive tasks and checkboxes, editable tables, shared undo, code highlighting,
-and math. Reading profiles include MDF Reading, Plain, and Nano-inspired,
-with adjustable typography and table density in both light and dark modes.
-The latter draws on Nicolas P. Rougier's NANO design ideas; it is not an official port.
-
-Install a prebuilt release on macOS/Linux with Node.js 22+ and a current
-Codex CLI/Desktop already available:
+Install on macOS/Linux with Node.js 22+ and a current Codex CLI/Desktop:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/guibor/org-workbench/v0.2.0/install.sh | sh
 ```
 
-The installer verifies the release checksum and installs without sudo or a
-source build. Restart Codex or open a fresh chat after installation. Review the
-script before executing it if preferred; detailed instructions are in the repo.
+Restart Codex or use a fresh chat after installation. This is a GPL-3.0-or-later
+community preview: explicit saves, a 1 MiB document limit, and no agenda,
+Babel, formula execution, or Emacs workflow hooks. The plugin adds no telemetry
+or AI calls. A browser demo is available for trying the interface without the
+desktop integration; it exports copies rather than saving original files.
 
-This is a community preview, not a replacement for Emacs Org. Files are limited
-to 1 MiB. There is no autosave, agenda, Babel, formula execution, or automatic
-Org workflow hooks. Browser edits download a copy; saving the original requires
-a compatible writable desktop host. The viewer has no telemetry or AI calls.
-
-Built on Uniorg, CodeMirror, React, and MCP Apps. GPL-3.0-or-later.
-Independent community project, not affiliated with OpenAI or GNU Emacs.
-
-Code, screenshots, limitations, and contributions:
 https://github.com/guibor/org-workbench
 
-### Short Version
+## Short Version
 
-Org Workbench is an open-source Org viewer/editor for Codex and the browser:
-read/source/split views, editable tasks and tables, and customizable reading
-profiles. It keeps your `.org` source intact. No Emacs needed, no telemetry.
-Early GPL preview, with a prebuilt one-command installer:
+Org Workbench is an open-source Codex plugin for reading and editing `.org`
+files right in the file panel. Rendered/source/split views, editable tasks and
+tables, and configurable reading profiles, without converting your notes to
+Markdown. Built on Uniorg and CodeMirror. Early GPL preview:
 https://github.com/guibor/org-workbench

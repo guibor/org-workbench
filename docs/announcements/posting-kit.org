@@ -1,0 +1,50 @@
+#+TITLE: Org Workbench Reddit Posting Kit
+
+* Destination and Format
+Primary destination: r/emacs. Submit a text post, not a bare repository link.
+The opening ties the plugin to an existing Org/Emacs workflow. Do not cross-post
+automatically. The repository screenshot gallery remains usable even if Reddit's
+current composer does not support inline images in a text post.
+
+* Ready Assets
+- =reddit.md=: first heading is the title; everything below it is the post body.
+- =screenshots.md=: public screenshot gallery linked directly in the post.
+- =screenshots/=: six high-resolution PNGs, plus a caption/alt-text/hash manifest.
+- =announcement.md=: plugin-first announcement and short version.
+
+=npm run prepare:reddit= creates =artifacts/org-workbench-reddit-kit.zip=,
+including separate =title.txt=, =body.md=, =payload.json=, and =captions.md=.
+It validates the screenshots against their hashes and makes no Reddit requests.
+
+Recommended attachments: =01-reading.png=, =03-split.png=, =02-tables.png=,
+in that order. Add =05-nano-dark.png= only if a fourth image is useful. The
+editing and settings screenshots are supplementary, not required in the post.
+Use the captions from the manifest. These are captures of the real browser
+demo UI, not full Codex application captures. Never present a simulated host
+window as a real Codex screenshot.
+
+* Community Checks
+Consulted Reddit's public =r/emacs/about/rules.json= and =about.json= on
+2026-10-27. The retrieved/indexed rules cover topicality, civility, humor,
+and effort. The submission guidance asks for code indented with four spaces;
+the post uses that format. The indexed metadata allows galleries and indicates
+posting restrictions, but does not establish this account's current eligibility.
+
+Sources:
+- https://www.reddit.com/r/emacs/about/rules.json
+- https://www.reddit.com/r/emacs/about.json
+
+The authenticated composer remains the source of truth for current posting
+eligibility, required flair, and last-minute moderator instructions. Do not
+invent a flair or claim the account has permission based on public metadata.
+
+* Publication Status
+- [ ] Saved as an unpublished Reddit account draft.
+- [ ] Authenticated composer rules/flair checked.
+- [ ] User explicitly authorized publication.
+- [ ] Posted; public URL verified.
+
+No post has been submitted. The local OAuth helper found no Reddit app setup.
+Chrome automation timed out before a composer could be inspected. The local
+post and images remain ready; account draft creation is a separate unfinished
+step, not implied by generating these files.

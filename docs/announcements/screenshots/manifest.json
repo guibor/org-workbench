@@ -1,0 +1,56 @@
+{
+  "source": "examples/field-notes.org",
+  "sourceSha256": "33e75ee82d02e0b1a40ef700ee92486716f21d1f4ce891c0af2d2094d95d5a67",
+  "interface": "Unmodified Org Workbench 0.2.0 browser build; same React renderer used by the Codex plugin. These are not full Codex application captures.",
+  "editing": "Screenshots are direct browser captures. No UI, save state, or host chrome has been composited or hidden.",
+  "screenshots": [
+    {
+      "file": "01-reading.png",
+      "caption": "Rendered Org with a folding outline, tasks, and reading typography.",
+      "alt": "Org Workbench reading view, showing an outline on the left and the public field-notes.org document on the right.",
+      "width": 3200,
+      "height": 2000,
+      "sha256": "6e722e6c52edf973defe4e9caf19291fcc65f4f1d7c717bb7b00ccf8628817b4"
+    },
+    {
+      "file": "02-tables.png",
+      "caption": "Tasks and a table remain part of the same .org document.",
+      "alt": "Org Workbench showing a task checklist and a four-column table with aligned numeric values.",
+      "width": 3200,
+      "height": 2000,
+      "sha256": "edcbc02602fc6c8c4fa6362e1defb3a5af6c554677ba3e7951ab4e882727420d"
+    },
+    {
+      "file": "03-split.png",
+      "caption": "Org source and the rendered table side by side.",
+      "alt": "Split view with the original Org table syntax on the left and its rendered table on the right.",
+      "width": 3840,
+      "height": 2160,
+      "sha256": "3ba52c957a6d6f297d7b1257964e1575e380e9733da74a284bc02da829ac043b"
+    },
+    {
+      "file": "04-editing.png",
+      "caption": "Editing a rendered table cell changes the original source; undo is shared.",
+      "alt": "After changing a table cell to Quiet morning, the same text is visible in the Org source and rendered table. The status bar shows unsaved changes.",
+      "width": 3840,
+      "height": 2160,
+      "sha256": "0aac3724025c9c79f12ffa152dbca843870e8bb674217cb6e9727e4c609f3ad5"
+    },
+    {
+      "file": "05-nano-dark.png",
+      "caption": "Optional Nano-inspired typography in dark mode.",
+      "alt": "Org Workbench in dark mode with the Nano-inspired monospaced reading profile and the outline visible.",
+      "width": 3200,
+      "height": 2000,
+      "sha256": "77750725e8614ae2a00774f9aeb610ea8f2c50ee240e516f765eb75b37b7cd44"
+    },
+    {
+      "file": "06-appearance.png",
+      "caption": "Reading controls: profile, text size, spacing, width, and table density.",
+      "alt": "The Reading appearance dialog, with Nano-inspired selected and controls for text size, line height, page width, and table density.",
+      "width": 3200,
+      "height": 2000,
+      "sha256": "e50b60b599a56b9d763aa1f154d34c694d958981d20ac564c6cde23282135af2"
+    }
+  ]
+}

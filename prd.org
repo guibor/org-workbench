@@ -18,11 +18,14 @@ with a portable browser edition and a public community repository.
 - [X] Adjustable typography, page width, and table density without source edits.
 - [X] One-command, checksum-verified prebuilt installation with no sudo.
 - [X] Prepare Reddit and announcement drafts; do not post them automatically.
+- [X] Prepare a plugin-first Reddit posting kit with real UI screenshots and captions.
+- [ ] Save an unpublished Reddit draft if an authenticated connection is available.
 - [X] Portable plugin manifest, Codex compatibility manifest, reproducible build.
 - [ ] Confirm a full open/edit/save round-trip in the real Codex desktop host.
 - [X] Publish the public GitHub repository: https://github.com/guibor/org-workbench
 
 * Immediate Next Steps
+- [X] Complete screenshot captures and verify post assets contain only the public fixture.
 - [X] Confirm installed plugin opening: user reports the view now works.
 - [ ] Verify original-file save in the real desktop host separately from opening.
 - [ ] Add representative community fixtures before expanding the Org dialect.
@@ -36,6 +39,11 @@ Org agenda, capture, formula execution, Babel execution, automatic inclusion,
 lossy WYSIWYG serialization, and full parity with Emacs Org export.
 
 * Changed Requirements
+** Plugin-first announcement
+Lead with opening and editing Org files inside Codex's file panel. The browser
+build is a secondary demo/development surface, not the headline product.
+Credit existing parsing, rendering, editor, and MCP frameworks explicitly.
+Screenshots must show the actual interface; never fabricate Codex host chrome.
 ** Editable, not read-only
 The previous feasibility proposal was a read-only viewer. The current request
 explicitly replaces that with rendered interactions and source editing. The

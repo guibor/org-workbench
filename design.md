@@ -28,6 +28,8 @@ line endings. There is no Org-to-Markdown-to-Org or HTML-to-Org conversion.
 | `server/index.ts` | Stdio MCP server. Registers the `.org` entrypoint and bundled app resource; app-only tools support bounded image reads and relative-link resolution. No server write tool. |
 | `server/files.ts` | `scopedPath` resolves real paths and rejects directory escapes, including symlinks. `readImage` accepts bounded raster formats only. |
 | `scripts/` | Build a self-contained server/UI; collect dependency notices; package an explicit runtime, examples, and documentation allowlist. Source lives in the matching public Git tag. |
+| `scripts/capture-announcement.mjs` | Capture actual public-fixture UI states in an isolated browser context. `capture` records PNGs and their hashes/captions; `goToHeading` navigates through the real outline. Verify table edits reach source, undo them, and compare the exported document byte-for-byte. No simulated Codex chrome. |
+| `scripts/prepare-reddit.mjs` | Split the first Markdown heading from the post body, validate title/body size and screenshot hashes, and create a local ZIP with text, payload, captions, and images. It makes no Reddit API calls and does not submit anything. |
 | `install.sh`, `scripts/archive.mjs` | Version-pinned prebuilt ZIP installer and release archive/checksum creation. Validate prerequisites, checksum, paths, and symlinks before extracting; register via the Codex CLI. Preserve old releases and reject unknown existing targets. Read structured marketplace metadata and re-register an existing local source; `restore_previous` attempts rollback on registration/install failure. |
 
 ## Trust Boundaries

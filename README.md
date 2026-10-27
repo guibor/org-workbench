@@ -2,12 +2,15 @@
 
 **An Org document should be easy to read without becoming difficult to keep.**
 
-Org Workbench is a local, open-source viewer **and editor** for `.org` files.
-It opens inside Codex through the MCP Apps file-handler API, and also runs as a
-standalone browser editor. No Emacs installation, cloud service, account, or API
-key is needed. Your original Org file remains the source of truth.
+Org Workbench is an open-source **Codex plugin for viewing and editing `.org`
+files directly in the file panel**. Your original Org file remains the source
+of truth: no Markdown conversion or separate editor window. The plugin uses
+the MCP Apps file-handler API and needs no Emacs installation or additional API key.
+A standalone browser build is available for demos and development.
 
 ![Org Workbench reading view](docs/reading.png)
+
+[More screenshots: tables, split editing, and reading profiles](docs/announcements/screenshots.md).
 
 ## What works
 
